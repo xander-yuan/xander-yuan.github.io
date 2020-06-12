@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Github多人协作 | YuanXu&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Github 团队多人协作步骤1. 复制仓库注意：复制的仓库默认为mater分支 1$ git clone https:&#x2F;&#x2F;github.com&#x2F;repository.git # 仓库的URL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github多人协作">
+<meta property="og:url" content="http://www.yuanxu/2020/06/08/0005/index.html">
+<meta property="og:site_name" content="YuanXu&#39;s Blog">
+<meta property="og:description" content="Github 团队多人协作步骤1. 复制仓库注意：复制的仓库默认为mater分支 1$ git clone https:&#x2F;&#x2F;github.com&#x2F;repository.git # 仓库的URL">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-08T09:53:46.219Z">
+<meta property="article:modified_time" content="2020-06-08T09:53:46.227Z">
+<meta property="article:author" content="Yuanxu">
+<meta property="article:tag" content="Blog Life Travel">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="YuanXu&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">YuanXu&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Where there is life, there is hope.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.yuanxu"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-0005" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/08/0005/" class="article-date">
+  <time datetime="2020-06-08T09:53:46.219Z" itemprop="datePublished">2020-06-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Github多人协作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Github-团队多人协作"><a href="#Github-团队多人协作" class="headerlink" title="Github 团队多人协作"></a>Github 团队多人协作</h1><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="1-复制仓库"><a href="#1-复制仓库" class="headerlink" title="1. 复制仓库"></a>1. 复制仓库</h4><p><strong>注意：复制的仓库默认为mater分支</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;repository.git # 仓库的URL</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h4 id="2-切换分支到develop"><a href="#2-切换分支到develop" class="headerlink" title="2. 切换分支到develop"></a>2. 切换分支到develop</h4><p>master分支是git的默认分支, 一般master分支用于发布稳定版本, 不是开发的主要的分支.<br>一般我们会新建一个develop分支用于开发.之后每次开发都提交到develop分支.只有要发布一个稳定的版本时才把develop分支合并到master分支.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 新建分支</span><br><span class="line">$ git checkout -b develop</span><br><span class="line"></span><br><span class="line"># 如果已经创建了develop分支, 只需要切换到develop分支</span><br><span class="line">$ git checkout develop</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-新建开发分支"><a href="#3-新建开发分支" class="headerlink" title="3. 新建开发分支"></a>3. 新建开发分支</h4><p>由于要多人开发, 个人尽量不要在develop分支开发. 而是在本地新建一个本地分支,之后程序都要在新建的开发分支进行修改，开发完毕后与develop分支合并.</p>
+<p><strong>开发分支只需要留在本地仓库即可，不要提交到github上。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 例如要添加adc模块， 可以新建分支adc_branch</span><br><span class="line">$ git checkout -b adc_branch</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-添加自己负责的模块"><a href="#4-添加自己负责的模块" class="headerlink" title="4. 添加自己负责的模块"></a>4. 添加自己负责的模块</h4><h4 id="5-合并分支"><a href="#5-合并分支" class="headerlink" title="5. 合并分支"></a>5. 合并分支</h4><p>添加完自己负责的模块之后， 先提交到自己新建的本地分支，然后切换到develop分支。<strong>在和develop分支合并前需要更新develop分支</strong>, 更新之后再将本地分支合并到develop。</p>
+<p><strong>注意：如果合并发生冲突，不要强制提交，应该放弃本地的修改。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 提交到本地</span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"># 根据自己的修改添加相应的说明， 不要用英文描述(因为可能看不懂)。</span><br><span class="line">$ git commit -m &quot;添加adc模块&quot; </span><br><span class="line"></span><br><span class="line"># 切换到develop分支</span><br><span class="line">$ git checkout develop</span><br><span class="line"></span><br><span class="line"># 更新develop分支（因为其他人可能已经修改了develop，</span><br><span class="line"># 你本地的develop分支不一定是最新的。）</span><br><span class="line">$ git pull origin develop</span><br><span class="line"></span><br><span class="line"># 在develop分支合并创建的开发分支</span><br><span class="line">$ git merge adc_branch</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-提交develop分支"><a href="#6-提交develop分支" class="headerlink" title="6. 提交develop分支"></a>6. 提交develop分支</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 提交develop分支到GitHub</span><br><span class="line">$ git push origin develop</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-删除不需要的本地分支"><a href="#7-删除不需要的本地分支" class="headerlink" title="7. 删除不需要的本地分支"></a>7. 删除不需要的本地分支</h4><p>如果本地的分支不再需要， 可以将其删除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 删除adc_branch分支</span><br><span class="line">$ git branch -d adc_branch</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yuanxu/2020/06/08/0005/" data-id="ckbawxxcx00007orb37amfigl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/09/0007/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          hexo部署到github服务器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/08/0006/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo创建分类和标签</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MCU/">MCU</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Test/">Test</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Test/" rel="tag">Test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E8%B7%AF/" rel="tag">电路</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag">通信协议</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/10/0008/">IIC为什么需要用开漏输出和上拉电阻</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/10/0010/">Markdown</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/09/0007/">hexo部署到github服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/08/0005/">Github多人协作</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/08/0006/">hexo创建分类和标签</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Yuanxu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>将QImage转换为numpy array | YuanXu&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近在做手写体识别，需要将QT中手写的数字转换成像训练集一样图片。因此需要将QImage转换为numpy array。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将QImage转换为numpy array">
+<meta property="og:url" content="http://www.yuanxu/2020/06/08/0003/index.html">
+<meta property="og:site_name" content="YuanXu&#39;s Blog">
+<meta property="og:description" content="最近在做手写体识别，需要将QT中手写的数字转换成像训练集一样图片。因此需要将QImage转换为numpy array。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-08T09:47:56.189Z">
+<meta property="article:modified_time" content="2020-06-08T09:47:56.209Z">
+<meta property="article:author" content="Yuanxu">
+<meta property="article:tag" content="Qt">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="YuanXu&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">YuanXu&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Where there is life, there is hope.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.yuanxu"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-0003" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/08/0003/" class="article-date">
+  <time datetime="2020-06-08T09:47:56.189Z" itemprop="datePublished">2020-06-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      将QImage转换为numpy array
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在做手写体识别，需要将QT中手写的数字转换成像训练集一样图片。因此需要将QImage转换为numpy array。</p>
+<a id="more"></a>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>笔者使用的是PyQt，但是对QT和Python之间数据之间的转换不太熟悉。查了很长时间，也没有找到详细的说明，最后在stackoverflow中查到了转换方法，但是说的也不清楚。</p>
+<p>终于，经过查阅QT的参考手册终于明白了转换过程。</p>
+<h2 id="详细过程"><a href="#详细过程" class="headerlink" title="详细过程"></a>详细过程</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">image = self.canvas_label.canvas.toImage()</span><br><span class="line">size = image.size()</span><br><span class="line">s = image.bits().asstring(size.width() * size.height() * image.depth() // <span class="number">8</span>)  <span class="comment"># format 0xffRRGGBB</span></span><br><span class="line"></span><br><span class="line">arr = np.fromstring(s, dtype=np.uint8).reshape((size.height(), size.width(), image.depth() // <span class="number">8</span>))</span><br><span class="line"></span><br><span class="line">new_image = Image.fromarray(array)</span><br><span class="line"></span><br><span class="line"><span class="comment"># convert to gray</span></span><br><span class="line">new_image.convert(<span class="string">"L"</span>)</span><br><span class="line">new_image.thumbnail((<span class="number">28</span>, <span class="number">28</span>))</span><br><span class="line">plt.imshow(new_image, cmap=<span class="string">'gray'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-将QImage转换为字符串"><a href="#1-将QImage转换为字符串" class="headerlink" title="1. 将QImage转换为字符串"></a>1. 将QImage转换为字符串</h3><p>笔者的原图是通过QPixmap绘制的一幅RGB图。之后将其转换为QImage。</p>
+<p>通过<code>s = image.bits().asstring(size.width() * size.height() * image.depth() // 8)</code>将图像数据转换成字符串。</p>
+<p>参数是图像中字节数，字节数等于图像宽度 × 图像高度 × 通道数，即$bytes = width * height * channels$</p>
+<p>需要注意的是通道数，查看QT的手册知道QT的RGB图像的格式是0xFFRRGGBB,其实就是将Alpha通道全部置为了0xFF。</p>
+<p>之前以为只有3个通道，所以一直有问题。<code>QImage.depth()</code>可以返回图像深度的比特数，对于RGB图<code>QImage.depth()</code>返回值为32，所以整除8之后就是通道数。</p>
+<h3 id="2-将字符串转换为Numpy-array"><a href="#2-将字符串转换为Numpy-array" class="headerlink" title="2. 将字符串转换为Numpy array"></a>2. 将字符串转换为Numpy array</h3><p>之后使用<code>np.fromstring()</code>即可通过字符串构造numpy array。</p>
+<p>到这里QImage转换为numpy array的任务就完成了。之后需要将原图进行灰度处理和压缩。</p>
+<h3 id="3-灰度处理-amp-压缩"><a href="#3-灰度处理-amp-压缩" class="headerlink" title="3. 灰度处理 &amp; 压缩"></a>3. 灰度处理 &amp; 压缩</h3><ul>
+<li>使用<code>Image.convert()</code>可以进行格式转换，详细用法见<a href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.convert" target="_blank" rel="noopener">https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.convert</a></li>
+<li>使用<code>Image.thumbnail()</code>进行压缩，注意该方法只能进行压缩，不能放大，而且是等比例压缩。如果需要放大可以使用<code>Image.resize()</code>方法。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.yuanxu/2020/06/08/0003/" data-id="ckbawxxd400017orbbp0ahj85" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/08/0004/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Gitee导入Github仓库
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MCU/">MCU</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Test/">Test</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Test/" rel="tag">Test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E8%B7%AF/" rel="tag">电路</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" rel="tag">通信协议</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/10/0008/">IIC为什么需要用开漏输出和上拉电阻</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/10/0010/">Markdown</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/09/0007/">hexo部署到github服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/08/0005/">Github多人协作</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/08/0006/">hexo创建分类和标签</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Yuanxu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
